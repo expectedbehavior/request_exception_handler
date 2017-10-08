@@ -104,7 +104,11 @@ ActionController::Base.send :include, RequestExceptionHandler
 
 # NOTE: Rails "parameters-parser" monkey patching follows :
 
-if defined? ActionDispatch::ParamsParser::ParseError # Rails 4.x
+if defined? ActionDispatch::Http::Parameters::DEFAULT_PARSERS # Rails 5.0 - https://github.com/rails/rails/commit/8db2e67c0ab5560314a8e26d93e5fa1eeda5a1fa#diff-6a80fa5836403509e86a81c2117af391
+
+  # stuff
+
+elsif  defined? ActionDispatch::ParamsParser::ParseError # Rails 4.x
 
   class ActionDispatch::ParamsParser
 
