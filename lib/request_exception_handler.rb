@@ -50,7 +50,11 @@ module RequestExceptionHandler
   end
 
   def self.included(base)
-    base.prepend_before_filter :check_request_exception
+    if Rails::VERSION::MAJOR >= 5
+      base.prepend_before_action :check_request_exception
+    else Rails::VERSION::MAJOR >= 4
+      base.prepend_before_filter :check_request_exception
+    end
   end
 
   # Resets the current +request_exception+ (to nil).
